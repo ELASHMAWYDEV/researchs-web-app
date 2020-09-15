@@ -4,13 +4,13 @@ const db = require("../../db");
 
 router.post("/", async (req, res) => {
   try {
+    
     //Check if user has privilage
-
     if (!req.user || req.user.lvl != "مشرف") {
       return res.json({
         success: false,
         errors: ["غير مسموح لك بالإطلاع علي هذه المعلومات"],
-      }); 
+      });
     }
 
     //Get all users from DB
@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
         users: usersResult,
       });
     }
-
   } catch (e) {
     return res.json({
       success: false,
