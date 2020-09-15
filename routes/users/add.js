@@ -41,7 +41,8 @@ router.post("/", async (req, res) => {
       const userResult = await db.collection("users").insertOne({
         username: user.username,
         lvl: user.lvl,
-        password: hashedPassword
+        password: hashedPassword,
+        createdAt: new Date()
       });
 
       if (!userResult) errors.push("حدث خطأ ما ، يرجي الرجوع للمطور ، رقم الخطأ: 102");
