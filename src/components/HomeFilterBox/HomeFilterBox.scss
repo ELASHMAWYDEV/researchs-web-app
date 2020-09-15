@@ -1,0 +1,68 @@
+@import "../../assets/sass/globals";
+
+.filter-box {
+  margin: 50px auto;
+  width: 900px;
+  max-width: 90%;
+  border-radius: 30px;
+  background-color: $white;
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.3);
+  padding: 35px 0;
+  .search-box {
+    @include flex;
+  }
+  .search-field {
+    display: inline-block;
+    width: 300px;
+    border-radius: 32px;
+    border: none;
+    background-color: $gray;
+    padding: 2px 22px;
+    font-weight: 500;
+    &::placeholder {
+      color: $darkGray;
+    }
+  }
+  .search-btn {
+    @include roundedBtn;
+  }
+  & > h4 {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 18px;
+  }
+  .select-boxs {
+    @include flex;
+    margin-top: 10px;
+    & > div {
+      margin: auto;
+      position: relative;
+      span {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translate(0, -3px);
+        border: 5px solid transparent;
+        border-top: 10px solid $darkGray;
+        
+      }
+    }
+    select {
+      padding: 3px 25px;
+      padding-left: 45px;
+      background-color: $gray;
+      color: $darkGray;
+      border: none;
+      border-radius: 32px;
+      cursor: pointer;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    option {
+      background-color: $white;
+      color: $black;
+    }
+  }
+}
