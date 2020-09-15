@@ -71,7 +71,7 @@ router.post("/", async (req, res) => {
         }
       );
 
-      if (userResult) {
+      if (userResult.ok) {
         return res.json({
           success: true,
           messages: ["تم تحديث المستخدم وكلمة مروره بنجاح"],
@@ -95,7 +95,7 @@ router.post("/", async (req, res) => {
         }
       );
 
-      if (userResult) {
+      if (userResult.ok) {
         return res.json({
           success: true,
           messages: ["تم تحديث المستخدم بنجاح"],
