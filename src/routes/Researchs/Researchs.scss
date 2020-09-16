@@ -1,0 +1,47 @@
+@import "../../assets/sass/globals";
+
+.researchs-container {
+  @include flex(column);
+  margin-top: 50px;
+  padding: 0 50px;
+  .add-new-btn {
+    @include roundedBtn;
+    width: unset;
+    height: unset;
+    padding: 0 35px;
+  }
+  .filter-container {
+    margin: 25px auto;
+    width: 100%;
+    & > h3 {
+      text-align: center;
+    }
+  }
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
+    input {
+      @include searchField;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  .select-box {
+    @include selectBox;
+    select {
+      width: 100%;
+      text-align-last: center;
+    }
+  }
+  .table-container {
+    margin-top: 15px;
+    width: 100%;
+    table {
+      @include table;
+    }      
+  }
+}

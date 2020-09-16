@@ -14,7 +14,7 @@ class HomeFilterBox extends Component {
         </div>
         <h4>فلترة</h4>
         <div className="select-boxs">
-          <div>
+          <div className="select-box">
           <select>
             <option value="">سنة البحث</option>
             <option value="">سنة البحث</option>
@@ -22,7 +22,7 @@ class HomeFilterBox extends Component {
             </select> 
             <span></span>
           </div>
-          <div>
+          <div className="select-box">
           <select>
             <option value="">الدرجة العلمية</option>
             <option value="">الدرجة العلمية</option>
@@ -30,7 +30,7 @@ class HomeFilterBox extends Component {
             </select>
             <span></span>
           </div>
-          <div>
+          <div className="select-box">
           <select>
             <option value="">البلد</option>
             <option value="">البلد</option>

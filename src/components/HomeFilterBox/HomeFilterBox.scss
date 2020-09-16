@@ -12,19 +12,12 @@
     @include flex;
   }
   .search-field {
-    display: inline-block;
+    @include searchField;
     width: 300px;
-    border-radius: 32px;
-    border: none;
-    background-color: $gray;
-    padding: 2px 22px;
-    font-weight: 500;
-    &::placeholder {
-      color: $darkGray;
-    }
   }
   .search-btn {
     @include roundedBtn;
+    margin-right: 50px;
   }
   & > h4 {
     text-align: center;
@@ -35,34 +28,8 @@
     @include flex;
     margin-top: 10px;
     & > div {
+      @include selectBox;
       margin: auto;
-      position: relative;
-      span {
-        position: absolute;
-        top: 50%;
-        left: 15px;
-        transform: translate(0, -3px);
-        border: 5px solid transparent;
-        border-top: 10px solid $darkGray;
-        
-      }
-    }
-    select {
-      padding: 3px 25px;
-      padding-left: 45px;
-      background-color: $gray;
-      color: $darkGray;
-      border: none;
-      border-radius: 32px;
-      cursor: pointer;
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      appearance: none;
-      box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-    option {
-      background-color: $white;
-      color: $black;
     }
   }
 }

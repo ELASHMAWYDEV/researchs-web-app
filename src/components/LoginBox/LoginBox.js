@@ -9,13 +9,16 @@ class LoginBox extends Component {
     password: "",
   };
 
+  static defaultProps = {
+    submitForm: (username, password) => null
+  }
   formHandler = (e) => {
     e.preventDefault();
     const username = e.target[0].value;
     const password = e.target[1].value;
 
     this.setState({ username, password });
-
+    this.props.submitForm(username, password);
   };
 
   render() {
