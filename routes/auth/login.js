@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
 
     let user = req.body;
     let errors = [];
-
+    console.log(user);
     //check for empty inputs
     if (!user.username) errors.push("يجب كتابة اسم المستخدم");
     if (!user.password) errors.push("لا يمكنك ترك كلمة المرور فارغة");
