@@ -10,13 +10,6 @@ const jwtToken =
 
 router.post("/", async (req, res) => {
   try {
-    //Check if user logged in
-    if (req.user) {
-      return res.json({
-        success: true,
-        messages: ["لقد قمت بتسجيل الدخول بالفعل"],
-      });
-    }
 
     let user = req.body;
     let errors = [];
