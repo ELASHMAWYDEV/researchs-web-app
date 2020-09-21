@@ -1,0 +1,154 @@
+@import "colors";
+
+@mixin mainContainer($color: $black) {
+  width: 100%;
+  height: 100%;
+  background-color: $black;
+}
+
+@mixin flex($dir: row) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin submitBtn($bgColor: $green, $active: $darkGreen, $color: $white) {
+  display: block;
+  width: 180px;
+  margin: 15px auto 0;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: $bgColor;
+  color: $color;
+  transition: 0.3s ease;
+  &:hover {
+    background-color: $active;
+  }
+  &:active {
+    transition: 0s ease;
+    transform: scale(0.97);
+  }
+}
+
+@mixin roundedBtn {
+  background-color: $green;
+  color: $white;
+  border: none;
+  border-radius: 32px;
+  font-size: 18px;
+  @include flex;
+  width: 120px;
+  height: 35px;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+  &:hover {
+    background-color: $darkGreen;
+  }
+  &:active {
+    transition: none;
+    transform: scale(0.95);
+  }
+}
+
+@mixin selectBox {
+  position: relative;
+  span {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translate(0, -3px);
+    border: 5px solid transparent;
+    border-top: 10px solid $darkGray;
+  }
+  select {
+    padding: 3px 25px;
+    padding-left: 45px;
+    background-color: $gray;
+    color: $darkGray;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.2);
+    option {
+      background-color: $white;
+      color: $black;
+      cursor: pointer;
+    }
+  }
+}
+
+@mixin searchField {
+  display: inline-block;
+  border-radius: 32px;
+  border: none;
+  background-color: $gray;
+  padding: 2px 22px;
+  font-weight: 500;
+  &::placeholder {
+    color: $darkGray;
+  }
+}
+
+@mixin table {
+  width: 100%;
+  background-color: $lightGray;
+  border-collapse: collapse;
+  border-right: 0.5px solid $lightGray;
+  border-left: 0.5px solid $lightGray;
+  border-bottom: 0.5px solid $lightGray;
+  border-radius: 8px;
+  overflow: hidden;
+}
+tbody tr:nth-child(even) {
+  background-color: $white;
+}
+tbody tr:nth-child(odd) {
+  background-color: $lightGray;
+}
+tr:nth-child(1) {
+  background-color: $black;
+}
+th {
+  font-size: 20px;
+  text-align: right;
+  padding-left: 30px;
+  color: $white;
+  font-weight: 500;
+}
+th:nth-child(1) {
+  padding-right: 20px;
+}
+td {
+  padding-left: 30px;
+  text-align: right;
+}
+tr td:nth-child(1) {
+  padding-right: 20px;
+}
+.imgs-container {
+  display: block;
+  height: 100%;
+  width: 80px;
+  @include flex;
+  justify-content: space-between;
+  img {
+    width: 25px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}

@@ -1,0 +1,24 @@
+// Global Files
+@import "../../assets/sass/colors";
+@import "../../assets/sass/globals";
+
+
+.loginContainer {
+  @include mainContainer;
+  @include flex(column);
+  .adminBtnContainer {
+    align-self: flex-end;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    .adminBtn {
+      @include submitBtn;
+
+    }
+  }
+  .go-home-btn {
+    @include submitBtn;
+    margin-bottom: 20px;
+    margin-left: 30px;
+  @include flex;    
+  }
+}

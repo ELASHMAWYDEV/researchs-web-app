@@ -1,0 +1,26 @@
+@import "./assets/sass/globals";
+
+@font-face {
+  font-family: "bein";
+  src: url("./assets/fonts/bein-normal.ttf");
+}
+
+body,html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: max-content;
+  overflow: auto;
+  font-family: 'bein';
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  outline: none;
+  font-family: 'bein';
+}
+a {
+  color: $white;
+}

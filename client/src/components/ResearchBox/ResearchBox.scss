@@ -1,0 +1,75 @@
+@import "../../assets/sass/globals";
+
+$right-width: 120px;
+
+.research-box {
+  width: 1200px;
+  max-width: 95%;
+  background-color: $black;
+  border-radius: 25px;
+  padding: 25px 40px;
+  margin: auto;
+  margin-bottom: 40px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+  color: $white;
+  p {
+    font-size: 20px;
+    width: $right-width;
+    white-space: nowrap;
+  }
+  .head-wrapper {
+    display: flex;
+    & > div {
+      @include flex;
+    }
+  }
+  .title-container {
+    align-items: flex-start;
+    h1 {
+      font-weight: 500;
+      font-size: 30px;
+    }
+  }
+  .id-container {
+    margin-right: auto;
+    h3 {
+      color: $green;
+      letter-spacing: 1px;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+  .description-container {
+    @include flex;
+    align-items: flex-start;
+    h4 {
+      font-weight: 500;
+      margin-right: 25px;
+    }
+  }
+  .footer-wrapper {
+    @include flex;
+    margin-right: $right-width;
+    margin-top: 20px;
+    justify-content: space-between;
+    & > div {
+      @include flex;
+      h5 {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      & > h5:nth-child(1) {
+        margin-left: 8px;
+      }
+      & > h5:nth-child(2) {
+        font-size: 18px;
+        color: $blue;
+        text-shadow: -1.5px 2px 1px black;
+      }
+    }
+  }
+  .get-btn {
+    @include roundedBtn;
+    width: 160px;
+  }
+}

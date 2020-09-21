@@ -1,0 +1,39 @@
+@import "../../assets/sass/globals";
+
+.notifier-container {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  @include flex(column);
+  .alert-box {
+    animation: alertBox 5s ease 1;
+    position: relative;
+    padding: 5px 20px;
+    border-radius: 10px;
+    text-align: right;
+    margin-bottom: 20px;
+    color: $white;
+    width: max-content;
+    overflow: hidden;
+    &.false {
+      background-color: #eb4e4bc2;
+    }
+    &.true {
+      background-color: #57c76fcc;
+    }
+    @keyframes alertBox {
+      0% {
+        transform: translateY(-150px);
+      }
+      10% {
+        transform: translateY(0);
+      }
+      90% {
+        transform: translateY(0px);
+      }
+      100% {
+        transform: translateY(-150px);
+      }
+    }
+  }
+}

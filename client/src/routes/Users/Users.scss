@@ -1,0 +1,22 @@
+@import "../../assets/sass/globals";
+
+
+
+
+.users-container {
+  @include flex(column);
+  margin-top: 50px;
+  padding: 0 50px;
+  .add-new-btn {
+    @include roundedBtn;
+    width: unset;
+    height: unset;
+    padding: 0 35px;
+  }
+  .table-container {
+    margin-top: 25px;
+    table {
+      @include table;
+    }      
+  }
+}

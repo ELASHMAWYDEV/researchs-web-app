@@ -1,0 +1,22 @@
+@import "../../assets/sass/globals";
+
+
+.settings-container {
+  .settings-box {
+    width: 900px;
+    max-width: 95%;
+    padding: 30px 25px;
+    background-color: $lightBlue;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  }
+  .save-btn {
+    @include roundedBtn;
+    width: unset;
+    height: unset;
+    padding: 0px 30px;
+
+    margin: 40px auto 0;
+  }
+}
