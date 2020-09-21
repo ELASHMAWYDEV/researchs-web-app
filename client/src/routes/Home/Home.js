@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Home.scss";
-import { API } from "../../config/config";
 import axios from "axios";
 
 //Components
@@ -23,7 +22,7 @@ class Home extends Component {
 
   getResearchs = async () => {
     try {
-      let response = await axios.post(`${API}/researchs/getResearchs`);
+      let response = await axios.post("/researchs/getResearchs");
 
       let data = await response.data;
       if (!data.success) {

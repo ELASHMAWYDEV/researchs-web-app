@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import LoginBox from "../../components/LoginBox/LoginBox";
 import { Link, Redirect } from "react-router-dom";
-import { API } from "../../config/config";
 import axios from "axios";
 import Cookie from "js-cookie";
 
@@ -34,7 +33,7 @@ class Login extends Component {
     let accessToken = Cookie.get("@access_token");
     // console.log(accessToken);
     let response = await axios.post(
-      `${API}/auth/login`,
+      `/auth/login`,
       {
         username: username,
         password: password,
@@ -75,14 +74,14 @@ class Login extends Component {
     return (
       <div className="loginContainer">
         {this.state.loggedIn && <Redirect to="/dashboard" />}
-        {this.state.errors.length != 0 && (
+        {this.state.errors.length !== 0 && (
           <Notifier
             messages={this.state.errors}
             type={false}
             onDone={() => this.setState({ errors: [] })}
           />
         )}
-        {this.state.success.length != 0 && (
+        {this.state.success.length !== 0 && (
           <Notifier
             messages={this.state.success}
             type={true}

@@ -6,7 +6,6 @@ import {
   Redirect,
 } from "react-router-dom";
 import Cookie from "js-cookie";
-import axios from "axios";
 
 //routes
 import { Login, Home, Dashboard } from "./routes/index";

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Researchs.scss";
-import { API } from "../../config/config";
 import axios from "axios";
 
 //Temporary
@@ -25,7 +24,7 @@ class Researchs extends Component {
 
   getResearchs = async () => {
     try {
-      let response = await axios.post(`${API}/researchs/getResearchs`);
+      let response = await axios.post(`/researchs/getResearchs`);
 
       let data = await response.data;
       if (!data.success) {
@@ -56,7 +55,7 @@ class Researchs extends Component {
     ];
 
     for (let tag of otherTags) {
-      if (tag != ref) tag.value = "";  
+      if (tag !== ref) tag.value = "";  
     }
 
     this.setState({ researchs: newResearchs });

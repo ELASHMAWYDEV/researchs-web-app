@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./Users.scss";
-import { API } from "../../config/config";
 
 //Temporary
 import users from "../../utility/users";
@@ -18,7 +17,7 @@ class Users extends Component {
 
 
   componentDidMount = async () => {
-    let users = await axios.post(`${API}/users/getUsers`);
+    let users = await axios.post(`/users/getUsers`);
     console.log(await users.data);
   }
 
