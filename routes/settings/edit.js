@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../db");
-const fileUpload = require("express-fileupload");
 
-router.use(fileUpload());
 
 router.post("/", async (req, res) => {
   try {

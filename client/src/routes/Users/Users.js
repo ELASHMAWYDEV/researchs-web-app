@@ -70,7 +70,7 @@ class Users extends Component {
       if (!data.success) {
         this.setState({ errors: data.errors });
       } else {
-        let newUsers = this.state.users.filter(u => u._id != data.user._id);
+        let newUsers = this.state.users.filter(u => u._id !== data.user._id);
         this.setState({ success: data.messages, users: newUsers });
       }
     }

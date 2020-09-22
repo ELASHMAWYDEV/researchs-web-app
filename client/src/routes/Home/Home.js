@@ -87,6 +87,7 @@ class Home extends Component {
           <ResearchBox
             key={i}
             research={research}
+            index={i + 1}
             showPopup={(research) => this.showPopup(research)}
           />
         ))}

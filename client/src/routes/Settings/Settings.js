@@ -11,8 +11,6 @@ import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import Loading from "../../components/Loading/Loading";
 import Notifier from "../../components/Notifier/Notifier";
 
-//Images
-import attachImage from "../../assets/img/attach.svg";
 
 //get access token from cookie
 let accessToken = Cookie.get("@access_token");

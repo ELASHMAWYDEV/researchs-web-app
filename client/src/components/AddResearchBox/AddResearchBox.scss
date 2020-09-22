@@ -1,0 +1,80 @@
+@import "../../assets/sass/globals";
+
+.add-research-container {
+  @include popupBoxContainer;
+  .box {
+    @include popupBox;
+  }
+  .close-icon {
+    @include closeIcon;
+  }
+  .inputs {
+    @include flex(column);
+    width: 100%;
+    & > div {
+      width: 100%;
+      @include flex;
+      justify-content: flex-end;
+      margin-bottom: 15px;
+    }
+    input {
+      flex: 1;
+      @include settingsInput;
+      background-color: $gray;
+    }
+    textarea {
+      flex: 1;
+      @include settingsInput;
+      background-color: $gray;
+    }
+    label {
+      margin-left: auto;
+      width: 100px;
+      text-align: right;
+    }
+    .fileUpload {
+      @include flex;
+      margin-bottom: 15px;
+      .label {
+        margin-left: 20px;
+        font-size: 18px;
+        width: 100px;
+        display: inline-block;
+      }
+      label:nth-child(1) {
+        margin: 0;
+      }
+      label:nth-child(2) {
+        width: unset;
+        margin-left: auto;
+        position: relative;
+        svg {
+          position: absolute;
+          color: $white;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        div {
+          display: inline-block;
+          padding: 2px 50px 2px 30px;
+          border-radius: 8px;
+          background-color: $black;
+          color: $white;
+          transition: 0.3s ease;
+          cursor: pointer;
+          &:hover {
+            background-color: $darkGray;
+          }
+        }
+      }
+      input {
+        display: none;
+      }
+    }
+  }
+  .add-btn {
+    @include roundedBtn;
+    margin: 20px auto 0;
+  }
+}

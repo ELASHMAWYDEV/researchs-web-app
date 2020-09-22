@@ -27,7 +27,7 @@ class App extends Component {
     loggedIn: false,
   };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     //check if user is logged
 
     if (!accessToken) {

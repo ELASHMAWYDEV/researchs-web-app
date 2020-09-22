@@ -7,6 +7,7 @@ import Cookie from "js-cookie";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import Loading from "../../components/Loading/Loading";
 import Notifier from "../../components/Notifier/Notifier";
+import AddResearchBox from "../../components/AddResearchBox/AddResearchBox";
 
 //Images
 import deleteImage from "../../assets/img/delete.svg";
@@ -22,6 +23,7 @@ class Researchs extends Component {
     filteredResearchs: [],
     success: [],
     errors: [],
+    addBoxVisible: false,
     years: [2019, 2018, 2020],
     degrees: ["دكتوراه", "ماجستير"],
     countries: ["مصر", "السعودية"],
@@ -95,7 +97,7 @@ class Researchs extends Component {
       this.setState({ errors: data.errors });
     } else {
       let newResearchs = this.state.researchs.filter(
-        (r) => data.research._id != r._id
+        (r) => data.research._id !== r._id
       );
       this.setState({
         success: data.messages,
@@ -126,8 +128,18 @@ class Researchs extends Component {
           />
         )}
         <DashboardHeader />
+        {this.state.addBoxVisible && (
+          <AddResearchBox
+            closeAddBox={() => this.setState({ addBoxVisible: false })}
+          />
+        )}
         <div className="researchs-container">
-          <button className="add-new-btn">أضف بحث جديد</button>
+          <button
+            className="add-new-btn"
+            onClick={() => this.setState({ addBoxVisible: true })}
+          >
+            أضف بحث جديد
+          </button>
           <div className="filter-container">
             <h3>فلترة</h3>
             <div className="filters">
@@ -214,7 +226,7 @@ class Researchs extends Component {
               <tbody>
                 {this.state.filteredResearchs.map((research, i) => (
                   <tr key={i}>
-                    <td># {research.index}</td>
+                    <td># {i + 1}</td>
                     <td>{research.title}</td>
                     <td>{research.year}</td>
                     <td>{research.degree}</td>

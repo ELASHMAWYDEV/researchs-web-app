@@ -18,8 +18,6 @@ class PopupBox extends Component {
 
   componentDidMount = () => {
     window.addEventListener("mouseup", this.closeBox);
-    this.box.style.top = window.scrollY;
-    console.log(window.scrollY);
   };
   componentWillUnmount = () => {
     window.removeEventListener("mouseup", this.closeBox);
@@ -67,7 +65,7 @@ class PopupBox extends Component {
                 {this.props.whatsappNumber}
               </h3>
             </a>
-            <a href="#">
+            <a href="/">
               <img src={telegramImage} alt="Telegram" className="request-img" />
               <h3
                 dir="ltr"

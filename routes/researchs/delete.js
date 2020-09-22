@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
     } else {
       return res.json({
         success: true,
-        messages: [`تم حذف البحث رقم #${research.index} بنجاح`],
+        messages: [`تم حذف البحث بنجاح`],
         research: researchDelete.value
       });
     }

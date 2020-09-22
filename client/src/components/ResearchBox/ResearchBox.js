@@ -34,7 +34,7 @@ class ReseachBox extends Component {
           </div>
           <div className="id-container">
             <p>رقم البحث</p>
-            <h3>#{research.index}</h3>
+            <h3>#{this.props.index}</h3>
           </div>
         </div>
         <div className="description-container">
