@@ -4,9 +4,7 @@ import axios from "axios";
 
 //Components
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
-
-//Temporary
-import researchs from "../../utility/researchs";
+import Loading from "../../components/Loading/Loading";
 
 //Images
 import deleteImage from "../../assets/img/delete.svg";
@@ -14,7 +12,8 @@ import editImage from "../../assets/img/edit.svg";
 
 class Researchs extends Component {
   state = {
-    researchs: researchs,
+    isLoading: false,
+    researchs: [],
     years: [2019, 2018, 2020],
     degrees: ["دكتوراه", "ماجستير"],
     countries: ["مصر", "السعودية"],
@@ -25,23 +24,21 @@ class Researchs extends Component {
   };
 
   getResearchs = async () => {
-    try {
-      let response = await axios.post(`/researchs/getResearchs`);
+    this.setState({ isLoading: true });
+    let response = await axios.post(`/researchs/getResearchs`);
 
-      let data = await response.data;
-      if (!data.success) {
-        this.setState({ errors: data.errors });
-        return;
-      } else {
-        this.setState({ researchs: data.researchs });
-      }
-    } catch (e) {
-      this.setState({ errors: [e.message] });
+    let data = await response.data;
+    if (!data.success) {
+      this.setState({ errors: data.errors });
+      return;
+    } else {
+      this.setState({ researchs: data.researchs });
     }
+    this.setState({ isLoading: false });
   };
 
   filterTable = (label, value, ref) => {
-    let newResearchs = researchs.filter((research) => {
+    let newResearchs = this.state.researchs.filter((research) => {
       if (!value) return true;
       return research[label].toString().includes(value.toString());
     });
@@ -65,6 +62,7 @@ class Researchs extends Component {
   render() {
     return (
       <>
+        {this.state.isLoading && <Loading />}
         <DashboardHeader />
         <div className="researchs-container">
           <button className="add-new-btn">أضف بحث جديد</button>

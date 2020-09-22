@@ -3,9 +3,6 @@ import "./SettingsOption.scss";
 
 
 class SettingsOption extends Component {
-  state = {
-    value: this.props.value
-  }
 
   static defaultProps = {
     label: "الإعداد",
@@ -16,14 +13,14 @@ class SettingsOption extends Component {
   }
 
   onChange = (value) => {
-    this.props.onChange(value);
     this.setState({ value });
+    this.props.onChange(value);
   }
   render() { 
     return (  
       <div className="settings-option">
         <div className="label">{this.props.label}</div>
-        <input placeholder={this.props.placeholder} type={this.props.type} value={this.state.value} onChange={e => this.onChange(e.target.value)}/>
+        <input placeholder={this.props.placeholder} type={this.props.type} value={this.props.value} onChange={e => this.onChange(e.target.value)}/>
       </div>
     );
   }
