@@ -22,7 +22,7 @@ class Notifier extends Component {
   render() {
     return (
       !this.state.done &&
-      this.props.messages.length != 0 && (
+      this.props.messages.length !== 0 && (
         <div className="notifier-container">
           {this.props.messages.map((msg, i) => (
             <div key={i} className={"alert-box " + this.props.type}>

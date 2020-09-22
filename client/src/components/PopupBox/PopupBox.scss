@@ -1,42 +1,12 @@
 @import "../../assets/sass/globals";
 
 .popup-box-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
-  @include flex;
+  @include popupBoxContainer;
   .popup-box {
-    position: relative;
-    width: 700px;
-    max-width: 95%;
-    border-radius: 32px;
-    background-color: $white;
-    margin: auto;
-    padding: 25px 35px;
-    text-align: center;
-    & > h3 {
-      font-size: 28px;
-    }
+    @include popupBox;
   }
   .close-icon {
-    position: absolute;
-    right: 25px;
-    top: 20px;
-    color: $black;
-    transition: 0.3s ease;
-    font-size: 28px;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.9;
-    }
-    &:active {
-      transition: none;
-      transform: scale(0.95);
-    }
+    @include closeIcon;
   }
   img {
     width: 60px;

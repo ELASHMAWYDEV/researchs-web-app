@@ -1,54 +1,31 @@
 import React, { Component } from "react";
 import "./HomePageHeader.scss";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Helmet from "react-helmet";
 
 class HomePageHeader extends Component {
-  state = {
-    logoUrl: "",
-    title: "أبحاثي",
-    keywords: "",
-  };
 
-  componentWillMount = () => {
-    this.getTitleAndKeywords();
-  };
 
-  getTitleAndKeywords = async () => {
-    let response = await axios.post("/settings/get");
-
-    let data = await response.data;
-    if (data.success) {
-      const settings = data.settings;
-      this.setState({
-        title: settings.websiteTitle,
-        keywords: settings.keywords,
-        logoUrl: settings.logoUrl,
-        description: settings.description,
-      });
-    }
-  };
 
   render() {
     return (
       <div className="HomeHeader">
         <Helmet>
-          <title>{this.state.title}</title>
-          <meta name="description" content={this.state.description} />
-          <meta name="keywords" content={this.state.keywords} />
+          <title>{this.props.websiteTitle}</title>
+          <meta name="description" content={this.props.description} />
+          <meta name="keywords" content={this.props.keywords} />
         </Helmet>
-        {this.state.logoUrl ? (
+        {this.props.logoUrl ? (
           <div className="LogoContainer">
             <img
-              src={this.state.logoUrl}
-              alt={this.state.title}
+              src={this.props.logoUrl}
+              alt={this.props.websiteTitle || "أبحاثي"}
               className="Logo"
             />
           </div>
         ) : (
           <Link to="/" className="Title">
-            {this.state.title}
+            {this.props.websiteTitle || "أبحاثي"} 
           </Link>
         )}
         <div className="Left-links">

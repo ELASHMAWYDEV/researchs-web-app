@@ -32,7 +32,7 @@ class DashboardHeader extends Component {
           <Link
             to={`/dashboard/settings`}
             className={
-              this.state.active == "settings" ? "active-tab" : undefined
+              this.state.active === "settings" ? "active-tab" : undefined
             }
             onClick={() => this.changeActive("settings")}
           >
@@ -41,7 +41,7 @@ class DashboardHeader extends Component {
           <Link
             to={`/dashboard/researchs`}
             className={
-              this.state.active == "researchs" ? "active-tab" : undefined
+              this.state.active === "researchs" ? "active-tab" : undefined
             }
             onClick={() => this.changeActive("researchs")}
           >
@@ -49,7 +49,7 @@ class DashboardHeader extends Component {
           </Link>
           <Link
             to={`/dashboard/users`}
-            className={this.state.active == "users" ? "active-tab" : undefined}
+            className={this.state.active === "users" ? "active-tab" : undefined}
             onClick={() => this.changeActive("users")}
           >
             المستخدمين

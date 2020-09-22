@@ -64,9 +64,9 @@ class Login extends Component {
       //Store user information in cookie
       Cookie.set("@user", data.user, {expires: 1});
 
-      setTimeout(() => {
-        this.setState({ loggedIn: true });
-      }, 1000);
+      // setTimeout(() => {
+        this.props.history.push("/dashboard/researchs");
+      // }, 1000);
     }
   };
 

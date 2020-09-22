@@ -11,6 +11,7 @@ import Loading from "../../components/Loading/Loading";
 
 class Home extends Component {
   state = {
+    settings: {},
     isLoading: false,
     popupVisible: false,
     selectedResearch: {},
@@ -18,12 +19,14 @@ class Home extends Component {
     researchs: [],
   };
 
-  componentDidMount = () => {
-    this.getResearchs();
+  componentDidMount = async () => {
+    this.setState({ isLoading: true });
+    await this.getResearchs();
+    await this.getWebsiteSettings();
+    this.setState({ isLoading: false });
   };
 
   getResearchs = async () => {
-    this.setState({ isLoading: true });
     let response = await axios.post("/researchs/getResearchs");
 
     let data = await response.data;
@@ -32,7 +35,6 @@ class Home extends Component {
     } else {
       this.setState({ researchs: data.researchs });
     }
-    this.setState({ isLoading: false });
   };
 
   showPopup = (research) => {
@@ -43,8 +45,20 @@ class Home extends Component {
     this.setState({ popupVisible: false });
   };
 
+  getWebsiteSettings = async () => {
+    let response = await axios.post("/settings/get");
+
+    let data = await response.data;
+    if (!data.success) {
+      this.setState({ errors: data.errors });
+    } else {
+      this.setState({ settings: data.settings });
+    }
+  };
+
   render() {
     let researchs = this.state.researchs;
+    let settings = this.state.settings;
     return (
       <div className="home-container">
         {this.state.isLoading && <Loading />}
@@ -53,9 +67,17 @@ class Home extends Component {
           <PopupBox
             research={this.state.selectedResearch}
             closePopup={this.closePopup}
+            email={this.state.settings.email}
+            whatsappNumber={settings.whatsappNumber}
+            telegramNumber={settings.telegramNumber}
           />
         )}
-        <HomePageHeader />
+        <HomePageHeader
+          logoUrl={settings.logoUrl}
+          websiteTitle={settings.websiteTitle}
+          keywords={settings.keywords}
+          description={settings.description}
+        />
         <HomeFilterBox
           researchs={researchs}
           onFilter={(researchs) => this.setState({ researchs })}

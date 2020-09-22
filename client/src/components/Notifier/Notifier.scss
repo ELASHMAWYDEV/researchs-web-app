@@ -2,8 +2,11 @@
 
 .notifier-container {
   position: absolute;
+  left: 50%;
   top: 20px;
-  width: 100%;
+  transform: translateX(-50%);
+  width: max-content;
+  margin: auto;
   @include flex(column);
   .alert-box {
     animation: alertBox 5s ease 1;

@@ -28,7 +28,7 @@ class HomeFilterBox extends Component {
     ];
 
     for (let tag of otherTags) {
-      if (tag != ref) tag.value = "";  
+      if (tag !== ref) tag.value = "";  
     }
 
     this.setState({ researchs: newResearchs });

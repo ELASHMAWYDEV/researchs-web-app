@@ -1,19 +1,27 @@
 import React, { Component } from "react";
 import "./Researchs.scss";
 import axios from "axios";
+import Cookie from "js-cookie";
 
 //Components
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import Loading from "../../components/Loading/Loading";
+import Notifier from "../../components/Notifier/Notifier";
 
 //Images
 import deleteImage from "../../assets/img/delete.svg";
 import editImage from "../../assets/img/edit.svg";
 
+//get access token from cookie
+let accessToken = Cookie.get("@access_token");
+
 class Researchs extends Component {
   state = {
     isLoading: false,
     researchs: [],
+    filteredResearchs: [],
+    success: [],
+    errors: [],
     years: [2019, 2018, 2020],
     degrees: ["دكتوراه", "ماجستير"],
     countries: ["مصر", "السعودية"],
@@ -30,15 +38,17 @@ class Researchs extends Component {
     let data = await response.data;
     if (!data.success) {
       this.setState({ errors: data.errors });
-      return;
     } else {
-      this.setState({ researchs: data.researchs });
+      this.setState({
+        researchs: data.researchs,
+        filteredResearchs: data.researchs,
+      });
     }
     this.setState({ isLoading: false });
   };
 
   filterTable = (label, value, ref) => {
-    let newResearchs = this.state.researchs.filter((research) => {
+    let filteredResearchs = this.state.researchs.filter((research) => {
       if (!value) return true;
       return research[label].toString().includes(value.toString());
     });
@@ -56,13 +66,65 @@ class Researchs extends Component {
       if (tag !== ref) tag.value = "";
     }
 
-    this.setState({ researchs: newResearchs });
+    this.setState({ filteredResearchs });
+  };
+
+  deleteResearch = async (research) => {
+    const deleteResearch = window.confirm(
+      `هل تريد حقا حذف البحث رقم ${research.index}`
+    );
+
+    if (!deleteResearch) return;
+
+    this.setState({ isLoading: true });
+
+    let response = await axios.post(
+      `/researchs/delete`,
+      {
+        research,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    let data = await response.data;
+    if (!data.success) {
+      this.setState({ errors: data.errors });
+    } else {
+      let newResearchs = this.state.researchs.filter(
+        (r) => data.research._id != r._id
+      );
+      this.setState({
+        success: data.messages,
+        researchs: newResearchs,
+        filteredResearchs: newResearchs,
+      });
+    }
+
+    this.setState({ isLoading: false });
   };
 
   render() {
     return (
       <>
         {this.state.isLoading && <Loading />}
+        {this.state.errors.length !== 0 && (
+          <Notifier
+            messages={this.state.errors}
+            type={false}
+            onDone={() => this.setState({ errors: [] })}
+          />
+        )}
+        {this.state.success.length !== 0 && (
+          <Notifier
+            messages={this.state.success}
+            type={true}
+            onDone={() => this.setState({ success: [] })}
+          />
+        )}
         <DashboardHeader />
         <div className="researchs-container">
           <button className="add-new-btn">أضف بحث جديد</button>
@@ -150,7 +212,7 @@ class Researchs extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.researchs.map((research, i) => (
+                {this.state.filteredResearchs.map((research, i) => (
                   <tr key={i}>
                     <td># {research.index}</td>
                     <td>{research.title}</td>
@@ -160,7 +222,12 @@ class Researchs extends Component {
                     <td>
                       <div className="imgs-container">
                         <img src={editImage} alt="تعديل" title="تعديل" />
-                        <img src={deleteImage} alt="حذف" title="حذف" />
+                        <img
+                          src={deleteImage}
+                          alt="حذف"
+                          title="حذف"
+                          onClick={() => this.deleteResearch(research)}
+                        />
                       </div>
                     </td>
                   </tr>

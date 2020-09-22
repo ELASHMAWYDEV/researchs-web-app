@@ -9,6 +9,7 @@ router.use(authenticateUser); //for auth
 router.use("/add", require("./add"));
 router.use("/edit", require("./edit"));
 router.use("/getResearchs", require("./getResearchs"));
+router.use("/delete", require("./delete"));
 
 
 module.exports = router;

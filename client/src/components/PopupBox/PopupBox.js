@@ -20,83 +20,76 @@ class PopupBox extends Component {
     window.addEventListener("mouseup", this.closeBox);
     this.box.style.top = window.scrollY;
     console.log(window.scrollY);
-  }
+  };
   componentWillUnmount = () => {
     window.removeEventListener("mouseup", this.closeBox);
-  }
+  };
 
   closeBox = (event) => {
-    
     if (event & !this.box.contains(event.target)) {
       this.setState({ visible: false });
       this.props.closePopup();
     } else {
       this.setState({ visible: false });
       this.props.closePopup();
-
     }
-  }
+  };
   render() {
     let research = this.props.research;
     return (
-      
-        <div className="popup-box-container" style={{display: !this.state.visible && "none"}}>
-        <div className="popup-box" ref={box => this.box = box}>
-          <AiFillCloseCircle className="close-icon" onClick={this.closeBox}/>
-            <h3>طلب البحث</h3>
-            <p>
-              للحصول علي هذا البحث ، نرجو منك ارسال رقم البحث علي احدي وسائل
-              التواصل الأتية
-              <br />
-              أو اضغط علي وسيلة التواصل وسيتم ارسال الطلب تلقائيا
-            </p>
-            <div className="id-container">
-              <p>رقم البحث</p>
-              <h3>#{research.index}</h3>
-            </div>
-            <div className="send-icons-container">
-              <a href="#">
-                <img
-                  src={whatsappImage}
-                  alt="Whatsapp"
-                  className="request-img"
-                />
-                <h3
-                  dir="ltr"
-                  className="request-contact"
-                  onClick={() => console.log("Hello World !")}
-                >
-                  +201064544529
-                </h3>
-              </a>
-              <a href="#">
-                <img
-                  src={telegramImage}
-                  alt="Telegram"
-                  className="request-img"
-                />
-                <h3
-                  dir="ltr"
-                  className="request-contact"
-                  onClick={() => console.log("Hello World !")}
-                >
-                  +201064544529
-                </h3>
-              </a>
-              <a href="mailto:elashmawydev@gmail.com">
-                <img src={gmailImage} alt="Gmail" className="request-img" />
-                <h3
-                  dir="ltr"
-                  className="request-contact"
-                  onClick={() => console.log("Hello World !")}
-                >
-                  elashmawydev@gmail.com
-                </h3>
-              </a>
-            </div>
+      <div
+        className="popup-box-container"
+        style={{ display: !this.state.visible && "none" }}
+      >
+        <div className="popup-box" ref={(box) => (this.box = box)}>
+          <AiFillCloseCircle className="close-icon" onClick={this.closeBox} />
+          <h3>طلب البحث</h3>
+          <p>
+            للحصول علي هذا البحث ، نرجو منك ارسال رقم البحث علي احدي وسائل
+            التواصل الأتية
+            <br />
+            أو اضغط علي وسيلة التواصل وسيتم ارسال الطلب تلقائيا
+          </p>
+          <div className="id-container">
+            <p>رقم البحث</p>
+            <h3>#{research.index}</h3>
+          </div>
+          <div className="send-icons-container">
+            <a
+              href={`https://api.whatsapp.com/send?phone=${this.props.whatsappNumber}`}
+            >
+              <img src={whatsappImage} alt="Whatsapp" className="request-img" />
+              <h3
+                dir="ltr"
+                className="request-contact"
+                onClick={() => console.log("Hello World !")}
+              >
+                {this.props.whatsappNumber}
+              </h3>
+            </a>
+            <a href="#">
+              <img src={telegramImage} alt="Telegram" className="request-img" />
+              <h3
+                dir="ltr"
+                className="request-contact"
+                onClick={() => console.log("Hello World !")}
+              >
+                {this.props.telegramNumber}
+              </h3>
+            </a>
+            <a href={`mailto:${this.props.email}}`}>
+              <img src={gmailImage} alt="Gmail" className="request-img" />
+              <h3
+                dir="ltr"
+                className="request-contact"
+                onClick={() => console.log("Hello World !")}
+              >
+                {this.props.email}
+              </h3>
+            </a>
           </div>
         </div>
-      
+      </div>
     );
   }
 }

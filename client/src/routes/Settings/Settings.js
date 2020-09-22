@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import "./Settings.scss";
 import axios from "axios";
 import Cookie from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 
 //Compontents
 import SettingsOption from "../../components/SettingsOption/SettingsOption";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import Loading from "../../components/Loading/Loading";
 import Notifier from "../../components/Notifier/Notifier";
+
+//Images
+import attachImage from "../../assets/img/attach.svg";
 
 //get access token from cookie
 let accessToken = Cookie.get("@access_token");
@@ -37,6 +42,7 @@ class Settings extends Component {
         whatsappNumber,
         telegramNumber,
         email,
+        logoUrl,
       } = data.settings;
       this.setState({
         websiteTitle,
@@ -44,6 +50,7 @@ class Settings extends Component {
         whatsappNumber,
         telegramNumber,
         email,
+        logoUrl,
       });
     } else {
       this.setState({ errors: data.errors });
@@ -55,21 +62,19 @@ class Settings extends Component {
   saveSettings = async () => {
     this.setState({ isLoading: true });
 
-    let response = await axios.post(
-      "/settings/edit",
-      {
-        websiteTitle: this.state.websiteTitle,
-        keywords: this.state.keywords,
-        whatsappNumber: this.state.whatsappNumber,
-        telegramNumber: this.state.telegramNumber,
-        email: this.state.email,
+    let formData = new FormData();
+    formData.append("logoImage", this.state.logoImage);
+    formData.append("websiteTitle", this.state.websiteTitle);
+    formData.append("keywords", this.state.keywords);
+    formData.append("whatsappNumber", this.state.whatsappNumber);
+    formData.append("telegramNumber", this.state.telegramNumber);
+    formData.append("email", this.state.email);
+
+    let response = await axios.post("/settings/edit", formData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    });
     let data = await response.data;
 
     if (data.success) {
@@ -88,7 +93,6 @@ class Settings extends Component {
         telegramNumber,
         email,
       });
-      
     } else {
       this.setState({ errors: data.errors });
     }
@@ -123,6 +127,42 @@ class Settings extends Component {
               onChange={(websiteTitle) => this.setState({ websiteTitle })}
               value={this.state.websiteTitle}
             />
+            <div className="logoUpload">
+              <div className="label">صورة الموقع</div>
+              <label htmlFor="logoUpload">
+                <FontAwesomeIcon icon={faPaperclip} />
+                <div>رفع الصورة</div>
+              </label>
+              <input
+                type="file"
+                accept=".png, .jpg, .gif"
+                id="logoUpload"
+                onChange={(e) =>
+                  this.setState({ logoImage: e.target.files[0] })
+                }
+              />
+              {this.state.logoUrl && (
+                <div className="current-image">
+                  <button
+                    className="remove-image"
+                    onClick={() =>
+                      this.setState({
+                        logoImage: null,
+                        logoUrl: null,
+                      })
+                    }
+                  >
+                    حذف
+                  </button>
+                  <p>الصورة الحالية</p>
+                  <img
+                    src={this.state.logoUrl}
+                    alt="logo"
+                    className="logo-icon"
+                  />
+                </div>
+              )}
+            </div>
             <SettingsOption
               label="كلمات البحث"
               placeholder="اكتب كلمات البحث مع وضع فاصلة بين كل كلمة"
@@ -147,7 +187,9 @@ class Settings extends Component {
               onChange={(email) => this.setState({ email })}
               value={this.state.email}
             />
-            <button className="save-btn" onClick={this.saveSettings}>حفظ الإعدادات</button>
+            <button className="save-btn" onClick={this.saveSettings}>
+              حفظ الإعدادات
+            </button>
           </div>
         </div>
       </>
