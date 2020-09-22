@@ -8,45 +8,50 @@ import {
 import Cookie from "js-cookie";
 
 //routes
-import { Login, Home, Dashboard } from "./routes/index";
+import {
+  Login,
+  Home,
+  Users,
+  Researchs,
+  Settings,
+  NotFound,
+} from "./routes/index";
 
 import "./App.scss";
+
+//get access token from cookie
+let accessToken = Cookie.get("@access_token");
 
 class App extends Component {
   state = {
     loggedIn: false,
   };
 
-  componentDidMount = () => {
-
+  componentWillMount = () => {
     //check if user is logged
-    //get access token from cookie
-    let accessToken = Cookie.get("@access_token");
 
     if (!accessToken) {
       this.setState({ loggedIn: false });
     } else {
       this.setState({ loggedIn: true });
-
     }
-  }
+  };
 
   render() {
+    let isLoggedIn = this.state.loggedIn;
     return (
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
+          <Route path="/login" exact render={props => isLoggedIn ? <Redirect to="/dashboard/researchs" /> : <Login {...props}/>} />
+          <Route path="/dashboard/researchs" render={props => !isLoggedIn ? <Redirect to="/login" /> : <Researchs {...props} />} />
+          <Route path="/dashboard/users" render={props => !isLoggedIn ? <Redirect to="/login" /> : <Users {...props} />} />
+          <Route path="/dashboard/settings" render={props => !isLoggedIn ? <Redirect to="/login"/> : <Settings {...props} />} />
           <Route
             path="/dashboard"
-            render={(props) =>
-              this.state.loggedIn ? (
-                <Dashboard {...props} />
-              ) : (
-                <Redirect to="/login" />
-              )
-            }
+            render={() => <Redirect to="/login" />}
           />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     );

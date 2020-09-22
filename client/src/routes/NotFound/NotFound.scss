@@ -1,0 +1,19 @@
+@import "../../assets/sass/globals";
+
+.not-found-container {
+  background-color: $black;
+  @include flex(column);
+  min-height: 100%;
+  h1 {
+    color: $white;
+    font-size: 60px;
+    span {
+      color: $red;
+    }
+  }
+
+  .go-home-btn {
+    @include roundedBtn;
+    margin-top: 40px;
+  }
+}

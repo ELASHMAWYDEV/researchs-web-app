@@ -4,7 +4,7 @@ const db = require("../../db");
 
 router.post("/", async (req, res) => {
   try {
-    
+
     //Check if user has privilage
     if (!req.user || req.user.lvl != "مشرف") {
       return res.json({

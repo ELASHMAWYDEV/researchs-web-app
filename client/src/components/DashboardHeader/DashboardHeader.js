@@ -21,14 +21,13 @@ class DashboardHeader extends Component {
     //remove the user & access token
     Cookie.remove("@user");
     Cookie.remove("@access_token");
-    console.log("logged out")
     this.setState({ loggedIn: false });
   };
 
   render() {
     return (
       <div className="dashboard-header">
-        {!this.state.loggedIn && <Redirect push to="/" />}
+        {!this.state.loggedIn && <Redirect to="/" />}
         <div className="tabs-container">
           <Link
             to={`/dashboard/settings`}

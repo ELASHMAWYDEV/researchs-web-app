@@ -73,7 +73,7 @@ class Login extends Component {
   render() {
     return (
       <div className="loginContainer">
-        {this.state.loggedIn && <Redirect to="/dashboard" />}
+        {this.state.loggedIn && <Redirect to="/dashboard/researchs" />}
         {this.state.errors.length !== 0 && (
           <Notifier
             messages={this.state.errors}

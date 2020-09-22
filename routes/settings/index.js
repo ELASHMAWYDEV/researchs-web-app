@@ -6,6 +6,7 @@ router.use(authenticateUser); //for auth
 
 
 router.use("/edit", require("./edit"));
+router.use("/get", require("./get"));
 
 
 

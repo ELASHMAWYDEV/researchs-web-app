@@ -7,9 +7,11 @@ import HomePageHeader from "../../components/HomePageHeader/HomePageHeader";
 import HomeFilterBox from "../../components/HomeFilterBox/HomeFilterBox";
 import ResearchBox from "../../components/ResearchBox/ResearchBox";
 import PopupBox from "../../components/PopupBox/PopupBox";
+import Loading from "../../components/Loading/Loading";
 
 class Home extends Component {
   state = {
+    isLoading: false,
     popupVisible: false,
     selectedResearch: {},
     errors: [],
@@ -21,19 +23,16 @@ class Home extends Component {
   };
 
   getResearchs = async () => {
-    try {
-      let response = await axios.post("/researchs/getResearchs");
+    this.setState({ isLoading: true });
+    let response = await axios.post("/researchs/getResearchs");
 
-      let data = await response.data;
-      if (!data.success) {
-        this.setState({ errors: data.errors });
-        return;
-      } else {
-        this.setState({ researchs: data.researchs });
-      }
-    } catch (e) {
-      this.setState({ errors: [e.message] });
+    let data = await response.data;
+    if (!data.success) {
+      this.setState({ errors: data.errors });
+    } else {
+      this.setState({ researchs: data.researchs });
     }
+    this.setState({ isLoading: false });
   };
 
   showPopup = (research) => {
@@ -48,6 +47,8 @@ class Home extends Component {
     let researchs = this.state.researchs;
     return (
       <div className="home-container">
+        {this.state.isLoading && <Loading />}
+
         {this.state.popupVisible && (
           <PopupBox
             research={this.state.selectedResearch}
